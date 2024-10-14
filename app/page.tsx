@@ -59,11 +59,49 @@ export default function Home() {
       </div>
       <div className={`w-full p-[40px] h-[500px]`}>
         <p className={`text-center font-bold text-[30px]`}>Our Products</p>
-        <div className={`grid grid-cols-4 w-full gap-[10px] mt-[20px]`}>
-          <div className={`h-[300px] border`}></div>
-          <div className={`h-[300px] border`}></div>
-          <div className={`h-[300px] border`}></div>
-          <div className={`h-[300px] border`}></div>
+        <div
+          className={`grid grid-cols-4 gap-[20px] w-[80%] mx-auto mt-[20px]`}
+        >
+          <div className={`h-[300px] rounded-lg shadow`}>
+            <div
+              className={`h-[70%] w-full bg-contain bg-center bg-no-repeat bg-[url("https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg")]`}
+            ></div>
+            <div className={`h-[30%] w-full bg-[#f4f5f7] p-2 space-y-[6px]`}>
+              <p className={`font-semibold`}>Solid Gold Petite Micropave</p>
+              <p className={`text-[12px] text-[#a9a9aa]`}>Luxury jewelery</p>
+              <p className={`text-[14px]`}>$168.00</p>
+            </div>
+          </div>
+          <div className={`h-[300px] rounded-lg shadow`}>
+            <div
+              className={`h-[70%] w-full bg-contain bg-center bg-no-repeat bg-[url("https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg")]`}
+            ></div>
+            <div className={`h-[30%] w-full bg-[#f4f5f7] p-2 space-y-[6px]`}>
+              <p className={`font-semibold`}>Solid Gold Petite Micropave</p>
+              <p className={`text-[12px] text-[#a9a9aa]`}>Luxury jewelery</p>
+              <p className={`text-[14px]`}>$168.00</p>
+            </div>
+          </div>
+          <div className={`h-[300px] rounded-lg shadow`}>
+            <div
+              className={`h-[70%] w-full bg-contain bg-center bg-no-repeat bg-[url("https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg")]`}
+            ></div>
+            <div className={`h-[30%] w-full bg-[#f4f5f7] p-2 space-y-[6px]`}>
+              <p className={`font-semibold`}>Solid Gold Petite Micropave</p>
+              <p className={`text-[12px] text-[#a9a9aa]`}>Luxury jewelery</p>
+              <p className={`text-[14px]`}>$168.00</p>
+            </div>
+          </div>
+          <div className={`h-[300px] rounded-lg shadow`}>
+            <div
+              className={`h-[70%] w-full bg-contain bg-center bg-no-repeat bg-[url("https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg")]`}
+            ></div>
+            <div className={`h-[30%] w-full bg-[#f4f5f7] p-2 space-y-[6px]`}>
+              <p className={`font-semibold`}>Solid Gold Petite Micropave</p>
+              <p className={`text-[12px] text-[#a9a9aa]`}>Luxury jewelery</p>
+              <p className={`text-[14px]`}>$168.00</p>
+            </div>
+          </div>
         </div>
       </div>
     </main>
