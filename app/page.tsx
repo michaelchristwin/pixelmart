@@ -62,10 +62,17 @@ export default function Home() {
         <div
           className={`grid grid-cols-4 gap-[20px] w-[80%] mx-auto mt-[20px]`}
         >
-          <div className={`h-[300px] rounded-lg shadow`}>
-            <div
-              className={`h-[70%] w-full bg-contain bg-center bg-no-repeat bg-[url("https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg")]`}
-            ></div>
+          <div
+            className={`h-[300px] rounded-lg shadow flex flex-col justify-between`}
+          >
+            <div className={`h-[60%] relative w-[70%] mx-auto`}>
+              <Image
+                src={`https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg`}
+                fill
+                alt="product"
+                className={`absolute top-0 left-0 object-contain`}
+              />
+            </div>
             <div className={`h-[30%] w-full bg-[#f4f5f7] p-2 space-y-[6px]`}>
               <p className={`font-semibold`}>Solid Gold Petite Micropave</p>
               <p className={`text-[12px] text-[#a9a9aa]`}>Luxury jewelery</p>
