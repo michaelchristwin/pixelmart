@@ -1,16 +1,23 @@
+"use client";
+
 import Image, { StaticImageData } from "next/image";
+import { useRouter } from "next/navigation";
+import { Card } from "./ui/card";
 
 interface CardProps {
   name: string;
   description: string;
   price: number;
   image: StaticImageData | string;
+  slug: string;
 }
 
-function ProductCard({ name, description, price, image }: CardProps) {
+function ProductCard({ name, description, price, image, slug }: CardProps) {
+  const router = useRouter();
   return (
-    <div
-      className={`h-[300px] rounded-lg shadow flex flex-col justify-between`}
+    <Card
+      className={`h-[300px] hover:cursor-pointer rounded-lg border-0 shadow-lg flex flex-col justify-between`}
+      onClick={() => router.push(`/${slug}`)}
     >
       <div className={`h-[60%] rounded-[10px] relative w-[97%] mx-auto`}>
         <Image
@@ -29,7 +36,7 @@ function ProductCard({ name, description, price, image }: CardProps) {
         </div>
         <p className={`text-[14px]`}>${price}</p>
       </div>
-    </div>
+    </Card>
   );
 }
 
