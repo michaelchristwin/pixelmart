@@ -14,8 +14,10 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { ProductData } from "@/lib/mockdata";
 
-const ProductPage = () => {
+const ProductPage = ({ params }: { params: { slug: string } }) => {
+  const data = ProductData.find((product) => product.slug === params.slug);
   const [selectedSize, setSelectedSize] = useState("M");
   const [selectedColor, setSelectedColor] = useState("Slate");
   const [quantity, setQuantity] = useState(1);
@@ -46,7 +48,7 @@ const ProductPage = () => {
           <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
             <img
               src={product.images[selectedImage]}
-              alt={product.name}
+              alt={data?.name}
               className="w-full h-full object-cover"
             />
           </div>
@@ -72,14 +74,14 @@ const ProductPage = () => {
         {/* Product Info */}
         <div className="space-y-6">
           <div>
-            <h1 className="text-3xl font-bold">{product.name}</h1>
+            <h1 className="text-3xl font-bold">{data?.name}</h1>
             <div className="mt-4 flex items-center space-x-4">
               <div className="flex items-center">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
                     className={`w-5 h-5 ${
-                      i < Math.floor(product.rating)
+                      i < Math.floor(data?.rating as number)
                         ? "fill-yellow-400 text-yellow-400"
                         : "text-gray-300"
                     }`}
@@ -93,7 +95,7 @@ const ProductPage = () => {
           </div>
 
           <div className="flex items-center justify-between">
-            <span className="text-2xl font-bold">${product.price}</span>
+            <span className="text-2xl font-bold">${data?.price}</span>
             <div className="flex space-x-4">
               <button className="p-2 rounded-full hover:bg-gray-100">
                 <Heart className="w-6 h-6" />
@@ -104,7 +106,7 @@ const ProductPage = () => {
             </div>
           </div>
 
-          <p className="text-gray-600">{product.description}</p>
+          <p className="text-gray-600">{data?.description}</p>
 
           {/* Size Selector */}
           <div>

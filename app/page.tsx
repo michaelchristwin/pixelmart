@@ -4,7 +4,7 @@ import Bedroom from "@/assets/bedroom.jpg";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import ProductCard from "@/components/ProductCard";
-import { ProductData } from "@/lib/mockdata.js";
+import { ProductData } from "@/lib/mockdata";
 
 export default function Home() {
   const RangeImageSrcs = [
