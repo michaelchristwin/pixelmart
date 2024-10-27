@@ -1,4 +1,10 @@
-import { CCTV, Headphones, SteelWaterbottle, TShirt } from "@/assets";
+import {
+  CCTV,
+  Headphones,
+  SteelWaterbottle,
+  TShirt,
+  FitnessTrackerWhite1,
+} from "@/assets";
 import { StaticImageData } from "next/image";
 
 export const ProductData: Product[] = [
@@ -8,6 +14,7 @@ export const ProductData: Product[] = [
     quantity: 50,
     slug: "wireless-bluetooth-headphones",
     price: 79.99,
+    images: [],
     image: Headphones,
     type: "simple",
     category: "Electronics",
@@ -21,6 +28,7 @@ export const ProductData: Product[] = [
     quantity: 100,
     slug: "stainless-steel-water-bottle",
     price: 24.99,
+    images: [],
     image: SteelWaterbottle,
 
     category: "Home & Kitchen",
@@ -36,6 +44,7 @@ export const ProductData: Product[] = [
     slug: "organic-cotton-t-shirt",
     price: 19.99,
     type: "simple",
+    images: [],
     image: TShirt,
     category: "Clothing",
     description: "Soft, breathable 100% organic cotton t-shirt.",
@@ -48,6 +57,7 @@ export const ProductData: Product[] = [
     quantity: 30,
     slug: "smart-home-security-camera",
     price: 129.99,
+    images: [],
     image: CCTV,
     type: "simple",
     category: "Electronics",
@@ -61,6 +71,7 @@ export const ProductData: Product[] = [
     slug: "yoga-mat",
     quantity: 60,
     price: 34.99,
+    images: [],
     image: "",
     type: "simple",
     category: "Sports & Outdoors",
@@ -74,6 +85,7 @@ export const ProductData: Product[] = [
     quantity: 0,
     slug: "portable-phone-charger",
     price: 49.99,
+    images: [],
     image: "",
     category: "Electronics",
     description:
@@ -89,6 +101,7 @@ export const ProductData: Product[] = [
     quantity: 40,
     slug: "cast-iron-skillet",
     price: 39.99,
+    images: [],
     image: "",
     category: "Home & Kitchen",
     description:
@@ -102,6 +115,7 @@ export const ProductData: Product[] = [
     quantity: 25,
     slug: "leather-wallet",
     price: 59.99,
+    images: [],
     image: "",
     type: "simple",
     category: "Accessories",
@@ -115,7 +129,8 @@ export const ProductData: Product[] = [
     quantity: 80,
     slug: "smart-fitness-tracker",
     price: 89.99,
-    image: "fitness-tracker",
+    images: [],
+    image: FitnessTrackerWhite1,
     category: "Electronics",
     description: "Water-resistant fitness tracker with heart rate monitor.",
     rating: 4.6,
@@ -133,6 +148,7 @@ export const ProductData: Product[] = [
     type: "simple",
     slug: "wooden-cutting-board-set",
     price: 44.99,
+    images: [],
     image: "",
     category: "Home & Kitchen",
     description: "Set of 3 acacia wood cutting boards in different sizes.",
@@ -146,6 +162,7 @@ export const ProductData: Product[] = [
     quantity: 150,
     slug: "reusable-grocery-bags",
     price: 14.99,
+    images: [],
     image: "",
     category: "Home & Kitchen",
     description: "Set of 5 durable, foldable reusable shopping bags.",
@@ -158,6 +175,7 @@ export const ProductData: Product[] = [
     quantity: 45,
     slug: "wireless-gaming-mouse",
     price: 69.99,
+    images: [],
     image: "",
     type: "simple",
     category: "Electronics",
@@ -171,6 +189,7 @@ export const ProductData: Product[] = [
     quantity: 70,
     slug: "artificial-succulent-plants",
     price: 29.99,
+    images: [],
     image: "",
     type: "simple",
     category: "Home & Garden",
@@ -184,6 +203,7 @@ export const ProductData: Product[] = [
     quantity: 0,
     slug: "stainless-steel-straws",
     price: 12.99,
+    images: [],
     image: "",
     type: "simple",
     category: "Home & Kitchen",
@@ -203,7 +223,7 @@ type BaseProduct = {
   image: StaticImageData | string;
   category: string;
   type: "simple" | "configurable" | "digital" | "bundle";
-  images?: string[] | StaticImageData[];
+  images: string[] | StaticImageData[];
   rating?: number;
   reviews?: number;
   stockStatus: "in_stock" | "out_of_stock" | "backorder";

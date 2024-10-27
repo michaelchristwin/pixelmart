@@ -67,7 +67,7 @@ export default function Home() {
           <ProductCard {...ProductData[0]} />
           <ProductCard {...ProductData[1]} />
           <ProductCard {...ProductData[2]} />
-          <ProductCard {...ProductData[3]} />
+          <ProductCard {...ProductData[8]} />
         </div>
       </div>
     </main>
