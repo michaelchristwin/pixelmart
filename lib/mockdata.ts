@@ -22,6 +22,7 @@ export const ProductData: Product[] = [
     slug: "stainless-steel-water-bottle",
     price: 24.99,
     image: SteelWaterbottle,
+
     category: "Home & Kitchen",
     description: "Durable 32oz water bottle, keeps drinks cold for 24 hours.",
     rating: 4.8,
@@ -114,11 +115,15 @@ export const ProductData: Product[] = [
     quantity: 80,
     slug: "smart-fitness-tracker",
     price: 89.99,
-    image: "",
+    image: "fitness-tracker",
     category: "Electronics",
     description: "Water-resistant fitness tracker with heart rate monitor.",
     rating: 4.6,
-    type: "simple",
+    type: "configurable",
+
+    variants: {
+      colors: ["white", "mint", "black"],
+    },
     stockStatus: "in_stock",
   },
   {
@@ -198,7 +203,7 @@ type BaseProduct = {
   image: StaticImageData | string;
   category: string;
   type: "simple" | "configurable" | "digital" | "bundle";
-  images?: string[];
+  images?: string[] | StaticImageData[];
   rating?: number;
   reviews?: number;
   stockStatus: "in_stock" | "out_of_stock" | "backorder";
@@ -236,7 +241,7 @@ type BundleProduct = BaseProduct & {
   }[];
 };
 
-type Product =
+export type Product =
   | SimpleProduct
   | ConfigurableProduct
   | DigitalProduct
