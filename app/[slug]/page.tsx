@@ -14,7 +14,16 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Product, ProductData } from "@/lib/mockdata";
+import { ConfigurableProduct, Product, ProductData } from "@/lib/mockdata";
+import { StaticImageData } from "next/image";
+
+const isConfigurable = (product: Product): product is ConfigurableProduct => {
+  return product.type === "configurable";
+};
+
+interface ColorImages {
+  [color: string]: (StaticImageData | string)[];
+}
 
 const ProductPage = ({ params }: { params: { slug: string } }) => {
   const product = ProductData.find((product) => product.slug === params.slug);
@@ -27,29 +36,31 @@ const ProductPage = ({ params }: { params: { slug: string } }) => {
 export default ProductPage;
 
 const DisplayProduct = ({ product }: { product: Product }) => {
-  const progduct = {
-    name: "Premium Cotton Crew Neck T-Shirt",
-    price: 49.99,
-    rating: 4.5,
-    reviews: 128,
-    description:
-      "Crafted from premium cotton, this classic crew neck t-shirt offers unmatched comfort and style. Perfect for everyday wear with a modern fit.",
-    sizes: ["XS", "S", "M", "L", "XL"],
-    colors: ["Slate", "Navy", "White", "Black"],
-    images: [
-      "/api/placeholder/500/600",
-      "/api/placeholder/500/600",
-      "/api/placeholder/500/600",
-      "/api/placeholder/500/600",
-    ],
-  };
-  const [selectedSize, setSelectedSize] = useState("M");
-  const [selectedColor, setSelectedColor] = useState("Slate");
+  const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [selectedImage, setSelectedImage] = useState(0);
-  // const images = [...Array(5)].map((_, i) => {
-  //   return `${data?.image}-${selectedColor}${i + 1}.webp`;
-  // });
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const colorImagesMap: ColorImages = React.useMemo(() => {
+    if (!isConfigurable(product) || !product.variants.colors) return {};
+    return product.variants.colors.reduce((map, color, colorIndex) => {
+      // Get 4 images for this color starting from colorIndex * 4
+      const startIndex = colorIndex * 4;
+      map[color] = product.images.slice(startIndex, startIndex + 4);
+      return map;
+    }, {} as ColorImages);
+  }, [product]);
+
+  // Get current set of images based on selected color
+  const currentImages = React.useMemo(() => {
+    if (!isConfigurable(product) || !selectedColor) {
+      return product.images.slice(0, 4);
+    }
+    return colorImagesMap[selectedColor] || product.images.slice(0, 4);
+  }, [product, selectedColor, colorImagesMap]);
+
+  const handleColorChange = (color: string) => {
+    setSelectedColor(color);
+    setSelectedImageIndex(0); // Reset to first image when color changes
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -58,22 +69,26 @@ const DisplayProduct = ({ product }: { product: Product }) => {
         <div className="space-y-4">
           <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
             <img
-              src={product.images[selectedImage] as string}
+              src={
+                typeof currentImages[selectedImageIndex] === "string"
+                  ? currentImages[selectedImageIndex]
+                  : currentImages[selectedImageIndex].src
+              }
               alt={product.name}
               className="w-full h-full object-cover"
             />
           </div>
           <div className="grid grid-cols-4 gap-4">
-            {product.images.map((img, idx) => (
+            {currentImages.map((img, idx) => (
               <button
                 key={idx}
-                onClick={() => setSelectedImage(idx)}
+                onClick={() => setSelectedImageIndex(idx)}
                 className={`aspect-square rounded-lg overflow-hidden bg-gray-100 ${
-                  selectedImage === idx ? "ring-2 ring-blue-500" : ""
+                  selectedImageIndex === idx ? "ring-2 ring-blue-500" : ""
                 }`}
               >
                 <img
-                  src={img as any}
+                  src={typeof img === "string" ? img : img.src}
                   alt={`Product ${idx + 1}`}
                   className="w-full h-full object-cover"
                 />
@@ -149,7 +164,7 @@ const DisplayProduct = ({ product }: { product: Product }) => {
                 {product.variants.colors?.map((color) => (
                   <button
                     key={color}
-                    onClick={() => setSelectedColor(color)}
+                    onClick={() => handleColorChange(color)}
                     className={`px-4 py-2 rounded-full border ${
                       selectedColor === color
                         ? "border-blue-500 bg-blue-50 text-blue-500"

@@ -4,6 +4,17 @@ import {
   SteelWaterbottle,
   TShirt,
   FitnessTrackerWhite1,
+  FitnessTrackerWhite2,
+  FitnessTrackerWhite3,
+  FitnessTrackerWhite4,
+  FitnessTrackerMint1,
+  FitnessTrackerMint2,
+  FitnessTrackerMint3,
+  FitnessTrackerMint4,
+  FitnessTrackerBlack1,
+  FitnessTrackerBlack2,
+  FitnessTrackerBlack3,
+  FitnessTrackerBlack4,
 } from "@/assets";
 import { StaticImageData } from "next/image";
 
@@ -129,15 +140,27 @@ export const ProductData: Product[] = [
     quantity: 80,
     slug: "smart-fitness-tracker",
     price: 89.99,
-    images: [],
+    images: [
+      FitnessTrackerWhite1,
+      FitnessTrackerWhite2,
+      FitnessTrackerWhite3,
+      FitnessTrackerWhite4,
+      FitnessTrackerMint1,
+      FitnessTrackerMint2,
+      FitnessTrackerMint3,
+      FitnessTrackerMint4,
+      FitnessTrackerBlack1,
+      FitnessTrackerBlack2,
+      FitnessTrackerBlack3,
+      FitnessTrackerBlack4,
+    ],
     image: FitnessTrackerWhite1,
     category: "Electronics",
     description: "Water-resistant fitness tracker with heart rate monitor.",
     rating: 4.6,
     type: "configurable",
-
     variants: {
-      colors: ["white", "mint", "black"],
+      colors: ["White", "Mint", "Black"],
     },
     stockStatus: "in_stock",
   },
@@ -229,7 +252,7 @@ type BaseProduct = {
   stockStatus: "in_stock" | "out_of_stock" | "backorder";
 };
 
-type ConfigurableProduct = BaseProduct & {
+export type ConfigurableProduct = BaseProduct & {
   type: "configurable";
   variants: {
     sizes?: string[];
