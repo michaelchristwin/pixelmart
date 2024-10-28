@@ -15,6 +15,10 @@ import {
   FitnessTrackerBlack2,
   FitnessTrackerBlack3,
   FitnessTrackerBlack4,
+  TShirtBrown,
+  TShirtBlue,
+  TShirtPink,
+  TShirtGreen,
 } from "@/assets";
 import { StaticImageData } from "next/image";
 
@@ -54,8 +58,11 @@ export const ProductData: Product[] = [
     quantity: 75,
     slug: "organic-cotton-t-shirt",
     price: 19.99,
-    type: "simple",
-    images: [],
+    type: "configurable",
+    variants: {
+      colors: ["Brown", "Blue", "Pink", "Green"],
+    },
+    images: [TShirtBrown, TShirtBlue, TShirtPink, TShirtGreen],
     image: TShirt,
     category: "Clothing",
     description: "Soft, breathable 100% organic cotton t-shirt.",

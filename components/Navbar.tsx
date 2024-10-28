@@ -4,7 +4,9 @@ import { ShoppingCart, User, Search, Heart } from "lucide-react";
 function Navbar() {
   return (
     <nav className={`flex justify-between px-[40px] py-[20px] items-center`}>
-      <p className={`font-bold text-xl`}>Pixelmart</p>
+      <Link href={"/"} className={`font-bold text-xl`}>
+        Pixelmart
+      </Link>
       <ul className={`flex items-center space-x-6`}>
         <Link
           role={"listitem"}

@@ -15,6 +15,10 @@ import FitnessTrackerBlack1 from "./fitness-monitor-black1.webp";
 import FitnessTrackerBlack2 from "./fitness-monitor-black2.webp";
 import FitnessTrackerBlack3 from "./fitness-monitor-black3.webp";
 import FitnessTrackerBlack4 from "./fitness-monitor-black4.webp";
+import TShirtBrown from "./t-shirt-brown.webp";
+import TShirtBlue from "./t-shirt-blue.webp";
+import TShirtPink from "./t-shirt-pink.webp";
+import TShirtGreen from "./t-shirt-green.webp";
 
 export {
   LivingRoom,
@@ -34,4 +38,8 @@ export {
   FitnessTrackerBlack2,
   FitnessTrackerBlack3,
   FitnessTrackerBlack4,
+  TShirtBrown,
+  TShirtBlue,
+  TShirtPink,
+  TShirtGreen,
 };
