@@ -41,7 +41,9 @@ function Navbar() {
         <User size={20} />
         <Search size={20} />
         <Heart size={20} />
-        <ShoppingCart size={20} />
+        <Link href={`/cart`}>
+          <ShoppingCart size={20} />
+        </Link>
       </div>
     </nav>
   );

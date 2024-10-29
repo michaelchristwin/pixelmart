@@ -17,7 +17,7 @@ function ProductCard({ name, description, price, image, slug }: CardProps) {
   return (
     <Card
       className={`h-[300px] hover:cursor-pointer rounded-lg border-0 shadow-lg flex flex-col justify-between`}
-      onClick={() => router.push(`/${slug}`)}
+      onClick={() => router.push(`/product/${slug}`)}
     >
       <div className={`h-[60%] rounded-[10px] relative w-[97%] mx-auto`}>
         <Image

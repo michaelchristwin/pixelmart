@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, use } from "react";
+import React, { useState, use, useCallback } from "react";
 import {
   Star,
   Heart,
@@ -37,7 +37,9 @@ const ProductPage = (props: { params: Promise<{ slug: string }> }) => {
 export default ProductPage;
 
 const DisplayProduct = ({ product }: { product: Product }) => {
-  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedColor, setSelectedColor] = useState(
+    product.type === "configurable" ? product.variants.colors?.[0] : "",
+  );
   const [quantity, setQuantity] = useState(1);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
@@ -60,11 +62,14 @@ const DisplayProduct = ({ product }: { product: Product }) => {
   // Get current set of images based on the selected color
   const currentImages = React.useMemo(() => {
     if (!selectedColor) {
-      return product.images.slice(
-        0,
-        //@ts-expect-error description: "TS is retarded"
-        product.images.length / product.variants.colors.length,
-      );
+      if (isConfigurable(product)) {
+        return product.images.slice(
+          0,
+          //@ts-expect-error description: "TS is retarded"
+          product.images.length / product.variants.colors.length,
+        );
+      }
+      return product.images.slice(0, product.images.length);
     }
     return colorImagesMap[selectedColor] || [];
   }, [product, selectedColor, colorImagesMap]);
@@ -72,6 +77,17 @@ const DisplayProduct = ({ product }: { product: Product }) => {
     setSelectedColor(color);
     setSelectedImageIndex(0); // Reset to first image when color changes
   };
+  const increaseQuantity = useCallback(() => {
+    if (quantity < product.quantity) {
+      setQuantity((p) => p + 1);
+    }
+  }, [product.quantity, quantity]);
+
+  const decreaseQuantity = useCallback(() => {
+    if (quantity > 1) {
+      setQuantity((p) => p - 1);
+    }
+  }, [quantity]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -196,14 +212,14 @@ const DisplayProduct = ({ product }: { product: Product }) => {
             <h3 className="text-sm font-medium">Quantity</h3>
             <div className="flex items-center border rounded-lg">
               <button
-                onClick={() => quantity > 1 && setQuantity(quantity - 1)}
+                onClick={decreaseQuantity}
                 className="p-2 hover:bg-gray-100"
               >
                 <Minus className="w-4 h-4" />
               </button>
               <span className="px-4">{quantity}</span>
               <button
-                onClick={() => setQuantity(quantity + 1)}
+                onClick={increaseQuantity}
                 className="p-2 hover:bg-gray-100"
               >
                 <Plus className="w-4 h-4" />

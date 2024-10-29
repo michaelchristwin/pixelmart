@@ -1,8 +1,5 @@
 import {
   CCTV,
-  Headphones,
-  SteelWaterbottle,
-  TShirt,
   FitnessTrackerWhite1,
   FitnessTrackerWhite2,
   FitnessTrackerWhite3,
@@ -25,15 +22,23 @@ import { StaticImageData } from "next/image";
 export const ProductData: Product[] = [
   {
     id: "p001",
-    name: "Wireless Bluetooth Headphones",
+    name: "Wireless Bluetooth Speakers",
     quantity: 50,
-    slug: "wireless-bluetooth-headphones",
+    slug: "wireless-bluetooth-speakers",
     price: 79.99,
-    images: [],
-    image: Headphones,
-    type: "simple",
+    images: [
+      "https://s.alicdn.com/@sc04/kf/Hfe6b06216437423c83adfde345cf9816A.jpg_720x720q50.jpg",
+      "https://s.alicdn.com/@sc04/kf/H9e90ab1cbf524cf091aae0ad5eff55e32.jpg_720x720q50.jpg",
+      "https://s.alicdn.com/@sc04/kf/H880328e3eace4de493de79e2ec344f8aT.jpg_720x720q50.jpg",
+    ],
+    image:
+      "https://s.alicdn.com/@sc04/kf/Hfe6b06216437423c83adfde345cf9816A.jpg_720x720q50.jpg",
+    type: "configurable",
+    variants: {
+      colors: ["White"],
+    },
     category: "Electronics",
-    description: "High-quality wireless headphones with noise cancellation.",
+    description: "High-quality wireless speakers with RGB 5 color lighting.",
     rating: 4.5,
     stockStatus: "in_stock",
   },
@@ -43,8 +48,11 @@ export const ProductData: Product[] = [
     quantity: 100,
     slug: "stainless-steel-water-bottle",
     price: 24.99,
-    images: [],
-    image: SteelWaterbottle,
+    images: [
+      "https://s.alicdn.com/@sc04/kf/H60f069e267d04fb389f67ae6883cd43bt.jpg_720x720q50.jpg",
+    ],
+    image:
+      "https://s.alicdn.com/@sc04/kf/H60f069e267d04fb389f67ae6883cd43bt.jpg_720x720q50.jpg",
 
     category: "Home & Kitchen",
     description: "Durable 32oz water bottle, keeps drinks cold for 24 hours.",
@@ -63,7 +71,7 @@ export const ProductData: Product[] = [
       colors: ["Brown", "Blue", "Pink", "Green"],
     },
     images: [TShirtBrown, TShirtBlue, TShirtPink, TShirtGreen],
-    image: TShirt,
+    image: TShirtBlue,
     category: "Clothing",
     description: "Soft, breathable 100% organic cotton t-shirt.",
     rating: 4.2,

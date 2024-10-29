@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { Mail, Phone, MapPin, CreditCard, Gift, Truck } from "lucide-react";
 import {
   FaFacebook,
