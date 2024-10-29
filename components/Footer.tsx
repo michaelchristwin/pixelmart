@@ -1,11 +1,15 @@
 import React from "react";
+import Image from "next/image";
 import { Mail, Phone, MapPin, CreditCard, Gift, Truck } from "lucide-react";
 import {
   FaFacebook,
   FaXTwitter,
   FaInstagram,
   FaYoutube,
+  FaPaypal,
+  FaCcVisa,
 } from "react-icons/fa6";
+import { FaCcMastercard } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -102,13 +106,9 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm">© 2024 Pixelmart. All rights reserved.</p>
             <div className="flex items-center space-x-4 mt-4 md:mt-0">
-              <img src="/api/placeholder/32/20" alt="Visa" className="h-5" />
-              <img
-                src="/api/placeholder/32/20"
-                alt="Mastercard"
-                className="h-5"
-              />
-              <img src="/api/placeholder/32/20" alt="PayPal" className="h-5" />
+              <FaCcVisa size={50} />
+              <FaCcMastercard size={50} />
+              <FaPaypal size={50} />
             </div>
           </div>
         </div>

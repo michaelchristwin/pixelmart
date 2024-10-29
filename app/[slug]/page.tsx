@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, use } from "react";
 import {
   Star,
   Heart,
@@ -15,7 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ConfigurableProduct, Product, ProductData } from "@/lib/mockdata";
-import { StaticImageData } from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 const isConfigurable = (product: Product): product is ConfigurableProduct => {
   return product.type === "configurable";
@@ -25,7 +25,8 @@ interface ColorImages {
   [color: string]: (StaticImageData | string)[];
 }
 
-const ProductPage = ({ params }: { params: { slug: string } }) => {
+const ProductPage = (props: { params: Promise<{ slug: string }> }) => {
+  const params = use(props.params);
   const product = ProductData.find((product) => product.slug === params.slug);
   if (!product) {
     return <p>Product is unavailable</p>;
@@ -39,24 +40,34 @@ const DisplayProduct = ({ product }: { product: Product }) => {
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
   const colorImagesMap: ColorImages = React.useMemo(() => {
     if (!isConfigurable(product) || !product.variants.colors) return {};
+
+    const totalColors = product.variants.colors.length;
+    const imagesPerColor = Math.floor(product.images.length / totalColors); // Dynamic calculation
+
     return product.variants.colors.reduce((map, color, colorIndex) => {
-      // Get 4 images for this color starting from colorIndex * 4
-      const startIndex = colorIndex * 4;
-      map[color] = product.images.slice(startIndex, startIndex + 4);
+      const startIndex = colorIndex * imagesPerColor;
+      map[color] = product.images.slice(
+        startIndex,
+        startIndex + imagesPerColor,
+      );
       return map;
     }, {} as ColorImages);
   }, [product]);
 
-  // Get current set of images based on selected color
+  // Get current set of images based on the selected color
   const currentImages = React.useMemo(() => {
-    if (!isConfigurable(product) || !selectedColor) {
-      return product.images.slice(0, 4);
+    if (!selectedColor) {
+      return product.images.slice(
+        0,
+        //@ts-expect-error description: "TS is retarded"
+        product.images.length / product.variants.colors.length,
+      );
     }
-    return colorImagesMap[selectedColor] || product.images.slice(0, 4);
+    return colorImagesMap[selectedColor] || [];
   }, [product, selectedColor, colorImagesMap]);
-
   const handleColorChange = (color: string) => {
     setSelectedColor(color);
     setSelectedImageIndex(0); // Reset to first image when color changes
@@ -67,15 +78,16 @@ const DisplayProduct = ({ product }: { product: Product }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Image Gallery */}
         <div className="space-y-4">
-          <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
-            <img
+          <div className="aspect-square overflow-hidden rounded-lg bg-gray-100 relative">
+            <Image
               src={
                 typeof currentImages[selectedImageIndex] === "string"
                   ? currentImages[selectedImageIndex]
                   : currentImages[selectedImageIndex].src
               }
               alt={product.name}
-              className="w-full h-full object-cover"
+              fill
+              className="w-full h-full object-cover absolute top-0 left-0"
             />
           </div>
           <div className="grid grid-cols-4 gap-4">
@@ -83,14 +95,15 @@ const DisplayProduct = ({ product }: { product: Product }) => {
               <button
                 key={idx}
                 onClick={() => setSelectedImageIndex(idx)}
-                className={`aspect-square rounded-lg overflow-hidden bg-gray-100 ${
+                className={`aspect-square rounded-lg overflow-hidden bg-gray-100 relative ${
                   selectedImageIndex === idx ? "ring-2 ring-blue-500" : ""
                 }`}
               >
-                <img
+                <Image
                   src={typeof img === "string" ? img : img.src}
                   alt={`Product ${idx + 1}`}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="w-full h-full object-cover absolute top-0 left-0"
                 />
               </button>
             ))}
